@@ -1,0 +1,10 @@
+[gd_scene format=2]
+
+[node name="GameOver" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 440.0
+margin_top = 248.0
+margin_right = 836.0
+margin_bottom = 405.0
+text = "Game Over"

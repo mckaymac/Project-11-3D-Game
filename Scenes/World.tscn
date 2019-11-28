@@ -1,0 +1,121 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/World.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Ground/Ground03_col.jpg" type="Texture" id=2]
+[ext_resource path="res://Scripts/Hole.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Furniture/Models/GLTF format/chair.glb" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Dryer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/Stuff.gd" type="Script" id=6]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 2 )
+
+[node name="World" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="Countdown" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="Ground" type="CSGBox" parent="."]
+use_collision = true
+width = 40.0
+height = 0.2
+depth = 40.0
+material = SubResource( 1 )
+
+[node name="Hole" type="CSGCylinder" parent="Ground"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0 )
+operation = 2
+radius = 0.1
+sides = 40
+script = ExtResource( 3 )
+
+[node name="Tween" type="Tween" parent="Ground/Hole"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 5, 5 )
+
+[node name="Stuff" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.32822, 5.18688, 7.60773 )
+
+[node name="Dryer" parent="Stuff" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55595, -4.50583, -7.80965 )
+script = ExtResource( 6 )
+
+[node name="Dryer2" parent="Stuff" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55595, -4.50583, -7.00105 )
+script = ExtResource( 6 )
+
+[node name="Dryer3" parent="Stuff" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.24822, -4.50583, -7.00105 )
+script = ExtResource( 6 )
+
+[node name="Dryer4" parent="Stuff" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.97975, -4.50583, -8.2325 )
+can_sleep = false
+script = ExtResource( 6 )
+
+[node name="Dryer5" parent="Stuff" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.97975, -4.50583, -7.31306 )
+can_sleep = false
+script = ExtResource( 6 )
+
+[node name="Dryer6" parent="Stuff" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.92965, -4.50583, -8.56103 )
+can_sleep = false
+script = ExtResource( 6 )
+
+[node name="Dryer7" parent="Stuff" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.56324, -4.50583, -8.56103 )
+can_sleep = false
+script = ExtResource( 6 )
+
+[node name="Dryer8" parent="Stuff" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.56324, -4.50583, -7.772 )
+can_sleep = false
+script = ExtResource( 6 )
+
+[node name="Dryer9" parent="Stuff" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97455, -4.50583, -7.772 )
+can_sleep = false
+script = ExtResource( 6 )
+
+[node name="Dryer10" parent="Stuff" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.06919, -4.51625, -6.7672 )
+can_sleep = false
+script = ExtResource( 6 )
+
+[node name="Dryer11" parent="Stuff" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.06919, -4.8528, -6.7672 )
+can_sleep = false
+script = ExtResource( 6 )
+
+[node name="HUD" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="HUD"]
+margin_right = 49.0
+margin_bottom = 29.0
+color = Color( 0.0196078, 0.0196078, 0.0196078, 0.25098 )
+
+[node name="ColorRect2" type="ColorRect" parent="HUD"]
+margin_left = 977.0
+margin_right = 1026.0
+margin_bottom = 29.0
+color = Color( 0.0196078, 0.0196078, 0.0196078, 0.25098 )
+
+[node name="Score" type="Label" parent="HUD"]
+margin_left = 19.0
+margin_top = 6.0
+margin_right = 97.0
+margin_bottom = 34.0
+text = "0"
+
+[node name="Remaining" type="Label" parent="HUD"]
+margin_left = 990.0
+margin_top = 7.0
+margin_right = 1068.0
+margin_bottom = 35.0
+text = "0"
+[connection signal="timeout" from="Countdown" to="." method="_on_Countdown_timeout"]
